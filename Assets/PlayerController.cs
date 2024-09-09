@@ -9,10 +9,13 @@ public class PlayerController : MonoBehaviour
     private float horizontal;
     private Rigidbody2D rb;
     private bool isFacingRight = true;
+    private Animator animator;
+
 
     void Awake()
     {
         this.rb = this.GetComponent<Rigidbody2D>();
+        animator = this.GetComponent<Animator>();
 
     }
 
@@ -20,7 +23,8 @@ public class PlayerController : MonoBehaviour
     {
         horizontal = Input.GetAxis("Horizontal");
         Debug.Log(horizontal);
-        this.rb.velocity = new Vector2(horizontal * speed, this.rb.velocity.y);
+        this.rb.velocity = new Vector2(horizontal * 8f, this.rb.velocity.y);
+        animator.SetFloat("speed", Mathf.Abs(horizontal));
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
